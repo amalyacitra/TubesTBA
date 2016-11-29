@@ -24,6 +24,8 @@ public class TubesTBA {
             LexicalAnalyzer l = new LexicalAnalyzer(input);
             System.out.println(l.Token());
             
+            Parser p = new Parser(l.Token());
+            System.out.println(p.formula());
 			
         }
     }

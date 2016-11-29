@@ -21,9 +21,12 @@ public class Stack {
         isi.addFirst(s);
     }
 
-    public boolean pop (){
+    public boolean pop (int s){
         if(isi.isEmpty())
             return false;
+        else if (isi.getFirst()!=s){
+            return false;
+        }
         else{
             isi.removeFirst();
             return true;
