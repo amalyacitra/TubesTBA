@@ -25,7 +25,14 @@ public class TubesTBA {
             System.out.println(l.Token());
             
             Parser p = new Parser(l.Token());
-            System.out.println(p.formula());
+            
+            if (p.formula()==true){
+                System.out.println("valid");
+            }
+            else {
+                System.out.println("tidak valid");
+            }
+         
 			
         }
     }

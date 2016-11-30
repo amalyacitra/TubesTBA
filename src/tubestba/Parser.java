@@ -28,22 +28,40 @@ public class Parser {
     public void parse(){
         String[] line = t.split(" ");
         for (int i=0; i<line.length; i++){
-            inputan.add(Integer.parseInt(line[i]));
+                inputan.add(Integer.parseInt(line[i]));
         }
         
         stack.push(-1);
     }
     
     public boolean formulaBasic (){
+        int ukuran = inputan.size();
+        
+       
         if ((inputan.get(0)==1) && (inputan.size()==1)){
-            token.add(11);
+            
             return true;
         }
+        
+        else if ( (inputan.get(0)==2) && (inputan.get(1)==1) || (inputan.get(1)==9) ){
+            if ( (inputan.get(0)==2) && (inputan.get(1)==1) && (inputan.size()==2) ){
+                return true;
+            }
+            else if ( (inputan.get(2)==1)){
+               return false;
+           }
+           else if ( (inputan.get(2)==2)){
+               return false;
+           }
+           else {
+               return false;
+           }
+        }
+        
         else if ((inputan.get(0)==1) && (inputan.get(1)!=null)){
             if ( (inputan.get(1)==3)||(inputan.get(1)==4)||(inputan.get(1)==5)||(inputan.get(1)==8) ){
-                if (inputan.get(2)==1){
-                    token.add(12);
-                    return true;
+                if ((inputan.get(2)==1) || (inputan.get(2)==9) ){
+                      return true;
                 }
                 else {
                     return false;
@@ -53,35 +71,167 @@ public class Parser {
                 return false;
             } 
         }
-        else if ((inputan.get(0)==6) && (inputan.get(1)==1)&&(inputan.get(2)==7)&&(inputan.get(3)==1)){
-            token.add(13);
-            return true;
+        
+        else if (inputan.get(0)==6) {
+            if ((inputan.get(1)==1) || (inputan.get(1)==2) || (inputan.get(1)==9) || (inputan.get(1)==10)){
+                if ((inputan.get(2)==7)|| (inputan.get(2)==3) || (inputan.get(2)==4) || (inputan.get(2)==5) || (inputan.get(2)==8) || (inputan.get(2)==10)){
+                    if ((inputan.get(3)==1)){
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
         }
-        else if ((inputan.get(0)==9) && (inputan.get(1)==1)&&(inputan.get(2)==10)){
-            token.add(14);
-            return true;
+        
+        else if ((inputan.get(0)==9)){
+            if( (inputan.get(1)==1 ) ){
+                if ((inputan.get(2)==10 )){
+                    return true;
+                }
+                else if ((inputan.get(2)==1 )){
+                    return false;
+                }
+                else {
+                   return true;
+                }
+            }
+            else if( (inputan.get(1)==2) || (inputan.get(1)==6) ){
+                if ((inputan.get(2)==1 ) && (inputan.get(3)!=1 )){
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        else if (inputan.get(0)==-1){
+            return false;
         }
         else{
             return false;
-        } 
-    }
+        }
+        
+        }
+        
+    
+        
+        
+        
     
     public boolean formula(){
+        int ukuran = inputan.size();
         if(inputan.get(0)==1){
-           if (formulaBasic()==true){
-               return true;
+           if ( (inputan.get(1)==3)||(inputan.get(1)==4)||(inputan.get(1)==5)||(inputan.get(1)==8) || (inputan.get(2)==9) ){
+               if (formulaBasic()==true){
+                    return true;
+                }
+               else{
+                    return false;
+                }
            }
-           else{
+           else {
+               if (formulaBasic()==true){
+                    return true;
+                }
+               else{
+                    return false;
+                }
+           }
+           
+        }
+        
+        else if (inputan.get(0)==2){
+           if ((inputan.get(1)==1) || (inputan.get(1)==9)){
+               if ((inputan.get(1)==9) && (inputan.get(2)==1) || (inputan.get(3)==10) ){
+                return true;
+               }
+               else if ((inputan.get(1)==1) && (inputan.get(2)==1) ) {
+                   if (formulaBasic()==true){
+                    return true;
+                }
+                else{
+                    return false;
+                }    
+               }
+               else {
+                   return false;
+               } 
+            }
+           else {
                return false;
            }
         }
+        
+        else if (inputan.get(0)==6){
+           if ( ((inputan.get(1)==1) || (inputan.get(1)==2) || (inputan.get(1)==9)) && (inputan.get(2)!=null)){
+               if ((inputan.get(2)==7) && (inputan.get(4)!=1)){
+                   if ( (inputan.get(3)==1) || (inputan.get(3)==2) || (inputan.get(3)==9) ) {
+                       if (formulaBasic()==true){
+                            return true;
+                        }
+                        else{
+                            return false;
+                    }
+                   }
+                   else {
+                       return false;
+                   }
+               }
+               else {
+                   return false;
+               }
+                
+            }
+            else {
+                return false;
+           }
+        }
+        
+        else if (inputan.get(0)==9){
+           if ( ((inputan.get(1)==1) || (inputan.get(1)==2) || (inputan.get(1)==6 )) && (inputan.get(2)!=null) || (inputan.get(ukuran-1)==10) ){
+               if (inputan.get(2)==10){
+                   if (formulaBasic()==true){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+               } 
+               else {
+                   if (formulaBasic()==true){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+               }
+               
+            }
+            else {
+                return false;
+           }
+        }
+        
+        else if (inputan.get(0)==-1){
+            return false;
+        }
+        
         else{
             return false;
         }
     }
-    
-    
-    
+     
     
     
     
