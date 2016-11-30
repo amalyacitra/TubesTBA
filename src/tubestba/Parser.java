@@ -28,7 +28,13 @@ public class Parser {
     public void parse(){
         String[] line = t.split(" ");
         for (int i=0; i<line.length; i++){
-                inputan.add(Integer.parseInt(line[i]));
+            if (line[line.length-1].equals("error")){
+              inputan.add(-1);
+            }
+            else{
+                inputan.add(Integer.parseInt(line[i])); 
+            }
+               
         }
         
         stack.push(-1);
@@ -131,7 +137,12 @@ public class Parser {
     
     public boolean formula(){
         int ukuran = inputan.size();
-        if(inputan.get(0)==1){
+        
+        if (inputan.get(inputan.size()-1)==-1){
+            return false;
+        }
+        
+        else if(inputan.get(0)==1){
            if ( (inputan.get(1)==3)||(inputan.get(1)==4)||(inputan.get(1)==5)||(inputan.get(1)==8) || (inputan.get(2)==9) ){
                if (formulaBasic()==true){
                     return true;
@@ -226,6 +237,8 @@ public class Parser {
         else if (inputan.get(0)==-1){
             return false;
         }
+        
+        
         
         else{
             return false;
