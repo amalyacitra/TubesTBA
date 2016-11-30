@@ -14,13 +14,13 @@ import java.util.ArrayList;
 public class Parser {
     ArrayList<Integer> inputan;
     ArrayList<Integer> token;
-    Stack stack;
+
     String t;
     
     public Parser(String t){
         inputan = new ArrayList<>();
         token = new ArrayList<>();
-        stack = new Stack();
+
         this.t=t;
         parse();
     }
@@ -37,7 +37,7 @@ public class Parser {
                
         }
         
-        stack.push(-1);
+
     }
     
     public boolean formulaBasic (){
